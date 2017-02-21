@@ -1,0 +1,23 @@
+{
+  "launch_path": "index.html",
+  "default_locale": "en",
+  "activities": {
+    "dhis": {
+      "href": "*"
+    }
+  },
+  "appType": "DASHBOARD_WIDGET",
+  "name": "Score Card Widget",
+  "version": "1.0.0",
+  "description": "The app that let you view score card in your DHIS 2 dashboards",
+  "developer": {
+    "name": "HISP Tanzania",
+    "email": "info@hisptanzania.org",
+    "url": "https://www.hisptanzania.org",
+    "company": "HISP Tanzania"
+  },
+  "icons": {
+    "48": "icon.png"
+  },
+  "manifest_generated_at": "Wed Feb 07 2017 14:45:20 GMT+0300 (EAT)"
+}
