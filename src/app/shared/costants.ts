@@ -7,6 +7,7 @@ import {Observable, Subscription} from "rxjs";
 @Injectable()
 export class Constants {
     root_dir: string = null;
+    root_api: string = null;
     private subscription: Subscription;
     current_orgunit: any = null;
     current_period: any = null;
@@ -14,17 +15,26 @@ export class Constants {
 
     constructor( private http: Http ){
       this.root_dir = '../../../';
-        // this.subscription = this.load().subscribe(
-        //   (data) => {
-        //     //noinspection TypeScriptUnresolvedVariable
-        //     this.root_dir = data.activities.dhis.href ;
-        //   }
-        // );
+      this.loadVersion().subscribe(( system_info )=>{
+        if(system_info.version >= 2.25 ){
+          this.root_api = '../../../api/25/';
+        }else{
+          this.root_api = '../../../api/';
+        }
+      });
 
       // this.root_dir = 'http://127.0.0.1:9000/';
       // this.root_dir = 'http://41.217.202.50:9002/dhis/'
       // this.root_dir = 'https://dhis.moh.go.tz/'
     }
+
+    //load system version to decide which analytics to use
+  loadVersion() {
+    return this.http.get("../../../api/system/info.json")
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
+
 
   load() {
     return this.http.get("manifest.webapp")
